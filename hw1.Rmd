@@ -1,0 +1,38 @@
+---
+title: "HW1 basic R"
+author: "Madison Martin"
+date: "1/16/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+```{r}
+tgpp = read.csv('./tgpp.csv')
+#1. What are the names of the columns in this dataset?
+colnames(tgpp)
+```
+
+```{r}
+#2. How many rows and columns does this file have?
+nrow(tgpp)
+ncol(tgpp)
+
+```
+```{r}
+#3. What kind of object is each data column?
+sapply(tgpp, class)
+```
+```{r}
+#4. What are the values of the datafile for rows 1, 5, and 8 at columns 3, 7, and 10?
+tgpp[c(1,5,8),c(3,7,10)]
+```
+```{r}
+#5 Create a pdf of the relationship between the variables “scale” and “richness”. Scale is the area in square meters of the quadrat in which richness was recorded. Be sure to label your axes clearly, and choose a color you find pleasing for the points. 
+plot(tgpp$scale,tgpp$richness,log="xy")
+```

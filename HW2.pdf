@@ -1,0 +1,81 @@
+---
+title: "HW1Intermediate"
+author: "Madison Martin"
+date: "1/18/2018"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+data(iris)
+head(iris)
+```
+```{r}
+sp_ids = unique(iris$Species)
+
+output = matrix(0, nrow=length(sp_ids), ncol=ncol(iris)-1)
+rownames(output) = sp_ids
+colnames(output) = names(iris[ , -ncol(iris)])
+
+for(i in seq_along(sp_ids)) {
+    iris_sp = subset(iris, subset=Species == sp_ids[i], select=-Species)
+    for(j in 1:(ncol(iris_sp))) {
+        x = 0
+        y = 0
+        if (nrow(iris_sp) > 0) {
+            for(k in 1:nrow(iris_sp)) {
+                x = x + iris_sp[k, j]
+                y = y + 1
+            }
+            output[i, j] = x / y 
+        }
+    }
+}
+output
+```
+Iris Loops
+1. Describe the values stored in the object output. In other words what did the loops create?
+The loops created a table of the averages of the sepal length and width and petal length and width for each of the three iris species.
+2. Describe using pseudo-code how output was calculated
+```{r,eval=FALSE}
+Loop through column one and add up all the items in the column and count how many rows are in the column until the species changes loop through total values added and divide by total number of rows of that species to provide an average. When the species changes x and y return to zero. 
+```
+3. The variables in the loop were named so as to be vague. How can the objects output, x, and y could be renamed such that it is clearer what is occurring in the loop.
+Output could be renamed average while y could be renamed num_rows and x could be renamed col_val
+4. It is possible to accomplish the same task using fewer lines of code? Please suggest one other way to calculate output that decreases the number of loops by 1.
+Decrease the number of loops by 1 by nesting the third for loop into the second for loop.
+5.
+```{r}
+i=1
+z=0
+x=1:10
+for (i in 1:10)
+{
+  z=z+x[i]
+    y[i]=z}
+            output[i]=z 
+        }
+output
+```
+6.
+```{r} 
+i=1
+z=0
+x=1:10
+for (i in 1:10)
+{ if(z>10) {y="NA"}
+  z=z+x[i]
+    y[i]=z}
+output[i]=z 
+        }
+output
+```
+```{r}
+git init
+```
+
+
